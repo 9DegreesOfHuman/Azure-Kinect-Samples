@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.InteropServices;
 using Microsoft.Azure.Kinect.Sensor;
 using Microsoft.Azure.Kinect.BodyTracking;
 using UnityEngine;
 
 public class SkeletalTrackingProvider : BackgroundDataProvider
 {
-    // bool readFirstFrame = false;
-    // TimeSpan initialTimestamp;
-
-    // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter { get; set; } = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-    // public Stream RawDataLoggingFile = null;
+    public override void StartClientThread(int id)
+    {
+        Task.Run(() => RunBackgroundThreadAsync(id));
+    }
 
     protected override void RunBackgroundThreadAsync(int id)
     {
@@ -22,7 +18,6 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
             UnityEngine.Debug.Log("Starting body tracker background thread.");
 
             // Buffer allocations.
-            // BackgroundData currentFrameData = new BackgroundData();
             // Open device.
             using (Device device = Device.Open(id))
             {
@@ -41,7 +36,8 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                 using (Tracker tracker = Tracker.Create(deviceCalibration, new TrackerConfiguration() { ProcessingMode = TrackerProcessingMode.Gpu, SensorOrientation = SensorOrientation.Default }))
                 {
                     UnityEngine.Debug.Log("Body tracker created.");
-                    while (m_runBackgroundThread)
+                    // while (m_runBackgroundThread)
+                    while (true)
                     {
                         using (Capture sensorCapture = device.GetCapture())
                         {
@@ -58,7 +54,7 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                             }
                             else
                             {
-                                IsRunning = true;
+                                // IsRunning = true;
                                 // Get number of bodies in the current frame.
                                 // currentFrameData.NumOfBodies = frame.NumberOfBodies;
 
@@ -82,14 +78,10 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
 
                         }
                     }
-                    tracker.Dispose();
+                    // tracker.Dispose();
                 }
-                device.Dispose();
+                // device.Dispose();
             }
-            // if (RawDataLoggingFile != null)
-            // {
-            //     RawDataLoggingFile.Close();
-            // }
         }
         catch (Exception e)
         {
