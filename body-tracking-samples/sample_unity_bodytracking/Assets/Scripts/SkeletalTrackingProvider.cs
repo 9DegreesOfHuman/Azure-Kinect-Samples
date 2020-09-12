@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -78,47 +78,6 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                                         _print(true, "pos: " + (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
                                     }
                                 }
-
-                                // Copy bodies.
-                                // for (uint i = 0; i < currentFrameData.NumOfBodies; i++)
-                                // {
-                                //     currentFrameData.Bodies[i].CopyFromBodyTrackingSdk(frame.GetBody(i), deviceCalibration);
-                                // }
-
-                                // // Store depth image.
-                                // Capture bodyFrameCapture = frame.Capture;
-                                // Image depthImage = bodyFrameCapture.Depth;
-                                // if (!readFirstFrame)
-                                // {
-                                //     readFirstFrame = true;
-                                //     initialTimestamp = depthImage.DeviceTimestamp;
-                                // }
-                                // currentFrameData.TimestampInMs = (float)(depthImage.DeviceTimestamp - initialTimestamp).TotalMilliseconds;
-                                // currentFrameData.DepthImageWidth = depthImage.WidthPixels;
-                                // currentFrameData.DepthImageHeight = depthImage.HeightPixels;
-
-                                // // Read image data from the SDK.
-                                // var depthFrame = MemoryMarshal.Cast<byte, ushort>(depthImage.Memory.Span);
-
-                                // // Repack data and store image data.
-                                // int byteCounter = 0;
-                                // currentFrameData.DepthImageSize = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight * 3;
-
-                                // for (int it = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight - 1; it > 0; it--)
-                                // {
-                                //     byte b = (byte)(depthFrame[it] / (ConfigLoader.Instance.Configs.SkeletalTracking.MaximumDisplayedDepthInMillimeters) * 255);
-                                //     currentFrameData.DepthImage[byteCounter++] = b;
-                                //     currentFrameData.DepthImage[byteCounter++] = b;
-                                //     currentFrameData.DepthImage[byteCounter++] = b;
-                                // }
-
-                                // if (RawDataLoggingFile != null && RawDataLoggingFile.CanWrite)
-                                // {
-                                //     binaryFormatter.Serialize(RawDataLoggingFile, currentFrameData);
-                                // }
-
-                                // Update data variable that is being read in the UI thread.
-                                // SetCurrentFrameData(ref currentFrameData);
                             }
 
                         }
