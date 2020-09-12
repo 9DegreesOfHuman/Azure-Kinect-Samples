@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -8,12 +8,12 @@ using UnityEngine;
 
 public class SkeletalTrackingProvider : BackgroundDataProvider
 {
-    bool readFirstFrame = false;
-    TimeSpan initialTimestamp;
+    // bool readFirstFrame = false;
+    // TimeSpan initialTimestamp;
 
-    System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter { get; set; } = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+    // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter { get; set; } = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-    public Stream RawDataLoggingFile = null;
+    // public Stream RawDataLoggingFile = null;
 
     protected override void RunBackgroundThreadAsync(int id)
     {
@@ -86,10 +86,10 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                 }
                 device.Dispose();
             }
-            if (RawDataLoggingFile != null)
-            {
-                RawDataLoggingFile.Close();
-            }
+            // if (RawDataLoggingFile != null)
+            // {
+            //     RawDataLoggingFile.Close();
+            // }
         }
         catch (Exception e)
         {
