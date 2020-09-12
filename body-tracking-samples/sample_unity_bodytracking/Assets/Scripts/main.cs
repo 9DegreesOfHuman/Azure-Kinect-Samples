@@ -6,9 +6,6 @@ public class main : MonoBehaviour
     void Start()
     {
         SkeletalTrackingProvider m_skeletalTrackingProvider = new SkeletalTrackingProvider();
-
-        //tracker ids needed for when there are two trackers
-        const int TRACKER_ID = 0;
-        m_skeletalTrackingProvider.StartClientThread(TRACKER_ID);
+        m_skeletalTrackingProvider.StartClientThread();
     }
 }

@@ -4,14 +4,14 @@ using Microsoft.Azure.Kinect.Sensor;
 using Microsoft.Azure.Kinect.BodyTracking;
 using UnityEngine;
 
-public class SkeletalTrackingProvider : BackgroundDataProvider
+public class SkeletalTrackingProvider : MonoBehaviour
 {
-    public override void StartClientThread(int id)
+    public void StartClientThread()
     {
-        Task.Run(() => RunBackgroundThreadAsync(id));
+        Task.Run(() => RunBackgroundThreadAsync());
     }
 
-    protected override void RunBackgroundThreadAsync(int id)
+    protected void RunBackgroundThreadAsync()
     {
         try
         {
@@ -19,6 +19,7 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
 
             // Buffer allocations.
             // Open device.
+            const int id = 0;
             using (Device device = Device.Open(id))
             {
                 device.StartCameras(new DeviceConfiguration()
