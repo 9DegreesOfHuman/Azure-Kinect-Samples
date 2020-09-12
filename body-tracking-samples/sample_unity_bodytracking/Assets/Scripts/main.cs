@@ -102,6 +102,8 @@ public class main : MonoBehaviour
             loopCount += 1;
         }
 
+        _print(true, $"Ran {loopCount} times, disposing");
+
         tracker.Dispose();
         device.Dispose();
         
