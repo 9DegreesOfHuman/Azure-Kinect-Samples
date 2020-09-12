@@ -62,46 +62,63 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                                 // Get number of bodies in the current frame.
                                 currentFrameData.NumOfBodies = frame.NumberOfBodies;
 
+                                if (frame.NumberOfBodies != 1) { _print(true, $"Non-singlular # of bodies: {frame.NumberOfBodies}"); }
+                                if (frame.NumberOfBodies == 1) {
+                                    Microsoft.Azure.Kinect.BodyTracking.Body body = frame.GetBody(0);
+                                    Microsoft.Azure.Kinect.BodyTracking.Skeleton skeleton = frame.GetBodySkeleton(0);
+
+                                    int numJoints = Microsoft.Azure.Kinect.BodyTracking.Skeleton.JointCount;
+                                    // _print(true, $"numJoints: {numJoints}"); // 32
+                                    for (int jointId = 0; jointId < numJoints; jointId++)
+                                    {
+                                        Microsoft.Azure.Kinect.BodyTracking.Joint joint = skeleton.GetJoint(jointId);
+                                        System.Numerics.Vector3 positionVector3 = joint.Position;
+                                        var pos = joint.Position;
+                                        // _print(true, "pos: " + (JointId)jointId + " " + pos[0] + " " + pos[1] + " " + pos[2]);
+                                        _print(true, "pos: " + (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
+                                    }
+                                }
+
                                 // Copy bodies.
-                                for (uint i = 0; i < currentFrameData.NumOfBodies; i++)
-                                {
-                                    currentFrameData.Bodies[i].CopyFromBodyTrackingSdk(frame.GetBody(i), deviceCalibration);
-                                }
+                                // for (uint i = 0; i < currentFrameData.NumOfBodies; i++)
+                                // {
+                                //     currentFrameData.Bodies[i].CopyFromBodyTrackingSdk(frame.GetBody(i), deviceCalibration);
+                                // }
 
-                                // Store depth image.
-                                Capture bodyFrameCapture = frame.Capture;
-                                Image depthImage = bodyFrameCapture.Depth;
-                                if (!readFirstFrame)
-                                {
-                                    readFirstFrame = true;
-                                    initialTimestamp = depthImage.DeviceTimestamp;
-                                }
-                                currentFrameData.TimestampInMs = (float)(depthImage.DeviceTimestamp - initialTimestamp).TotalMilliseconds;
-                                currentFrameData.DepthImageWidth = depthImage.WidthPixels;
-                                currentFrameData.DepthImageHeight = depthImage.HeightPixels;
+                                // // Store depth image.
+                                // Capture bodyFrameCapture = frame.Capture;
+                                // Image depthImage = bodyFrameCapture.Depth;
+                                // if (!readFirstFrame)
+                                // {
+                                //     readFirstFrame = true;
+                                //     initialTimestamp = depthImage.DeviceTimestamp;
+                                // }
+                                // currentFrameData.TimestampInMs = (float)(depthImage.DeviceTimestamp - initialTimestamp).TotalMilliseconds;
+                                // currentFrameData.DepthImageWidth = depthImage.WidthPixels;
+                                // currentFrameData.DepthImageHeight = depthImage.HeightPixels;
 
-                                // Read image data from the SDK.
-                                var depthFrame = MemoryMarshal.Cast<byte, ushort>(depthImage.Memory.Span);
+                                // // Read image data from the SDK.
+                                // var depthFrame = MemoryMarshal.Cast<byte, ushort>(depthImage.Memory.Span);
 
-                                // Repack data and store image data.
-                                int byteCounter = 0;
-                                currentFrameData.DepthImageSize = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight * 3;
+                                // // Repack data and store image data.
+                                // int byteCounter = 0;
+                                // currentFrameData.DepthImageSize = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight * 3;
 
-                                for (int it = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight - 1; it > 0; it--)
-                                {
-                                    byte b = (byte)(depthFrame[it] / (ConfigLoader.Instance.Configs.SkeletalTracking.MaximumDisplayedDepthInMillimeters) * 255);
-                                    currentFrameData.DepthImage[byteCounter++] = b;
-                                    currentFrameData.DepthImage[byteCounter++] = b;
-                                    currentFrameData.DepthImage[byteCounter++] = b;
-                                }
+                                // for (int it = currentFrameData.DepthImageWidth * currentFrameData.DepthImageHeight - 1; it > 0; it--)
+                                // {
+                                //     byte b = (byte)(depthFrame[it] / (ConfigLoader.Instance.Configs.SkeletalTracking.MaximumDisplayedDepthInMillimeters) * 255);
+                                //     currentFrameData.DepthImage[byteCounter++] = b;
+                                //     currentFrameData.DepthImage[byteCounter++] = b;
+                                //     currentFrameData.DepthImage[byteCounter++] = b;
+                                // }
 
-                                if (RawDataLoggingFile != null && RawDataLoggingFile.CanWrite)
-                                {
-                                    binaryFormatter.Serialize(RawDataLoggingFile, currentFrameData);
-                                }
+                                // if (RawDataLoggingFile != null && RawDataLoggingFile.CanWrite)
+                                // {
+                                //     binaryFormatter.Serialize(RawDataLoggingFile, currentFrameData);
+                                // }
 
                                 // Update data variable that is being read in the UI thread.
-                                SetCurrentFrameData(ref currentFrameData);
+                                // SetCurrentFrameData(ref currentFrameData);
                             }
 
                         }
@@ -119,5 +136,9 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
         {
             UnityEngine.Debug.LogError(e.Message);
         }
+    }
+
+    void _print(bool shouldPrint, string msg) {
+        if (shouldPrint) Debug.Log(msg);
     }
 }
