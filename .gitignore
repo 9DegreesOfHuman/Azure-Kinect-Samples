@@ -354,6 +354,7 @@ Logs/
 body-tracking-samples/sample_unity_bodytracking/Assets/Plugins
 body-tracking-samples/sample_unity_bodytracking/*.dll
 body-tracking-samples/sample_unity_bodytracking/*onnx
+body-tracking-samples/sample_unity_bodytracking/*.zip
 
 
 

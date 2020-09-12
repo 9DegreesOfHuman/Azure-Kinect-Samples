@@ -63,21 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Config\ConfigLoader.cs" />
-    <Compile Include="Assets\Config\Configs.cs" />
-    <Compile Include="Assets\Scripts\BackgroundData.cs" />
-    <Compile Include="Assets\Scripts\BackgroundDataProvider.cs" />
-    <Compile Include="Assets\Scripts\Body.cs" />
-    <Compile Include="Assets\Scripts\Constants.cs" />
-    <Compile Include="Assets\Scripts\CustomColors.cs" />
     <Compile Include="Assets\Scripts\main.cs" />
-    <Compile Include="Assets\Scripts\PuppetAvatar.cs" />
-    <Compile Include="Assets\Scripts\SkeletalTrackingProvider.cs" />
-    <Compile Include="Assets\Scripts\TrackerHandler.cs" />
-    <Compile Include="Assets\Skeleton\CameraFlipper.cs" />
-    <Compile Include="Assets\Skeleton\Skeleton.cs" />
-    <Compile Include="Assets\Skeleton\SkeletonPosition.cs" />
-    <Compile Include="Assets\Skeleton\Smoother.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -285,20 +271,20 @@
     <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reflection.Emit.Lightweight">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Reflection.Emit.Lightweight.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Azure.Kinect.Sensor">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.Sensor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Reflection.Emit.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
