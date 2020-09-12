@@ -23,27 +23,27 @@ public abstract class BackgroundDataProvider
         m_runBackgroundThread = false;
     }
 
-    public void SetCurrentFrameData(ref BackgroundData currentFrameData)
-    {
-        lock (m_lockObj)
-        {
-            var temp = currentFrameData;
-            currentFrameData = m_frameBackgroundData;
-            m_frameBackgroundData = temp;
-            m_latest = true;
-        }
-    }
+    // public void SetCurrentFrameData(ref BackgroundData currentFrameData)
+    // {
+    //     lock (m_lockObj)
+    //     {
+    //         var temp = currentFrameData;
+    //         currentFrameData = m_frameBackgroundData;
+    //         m_frameBackgroundData = temp;
+    //         m_latest = true;
+    //     }
+    // }
 
-    public bool GetCurrentFrameData(ref BackgroundData dataBuffer)
-    {
-        lock (m_lockObj)
-        {
-            var temp = dataBuffer;
-            dataBuffer = m_frameBackgroundData;
-            m_frameBackgroundData = temp;
-            bool result = m_latest;
-            m_latest = false;
-            return result;
-        }
-    }
+    // public bool GetCurrentFrameData(ref BackgroundData dataBuffer)
+    // {
+    //     lock (m_lockObj)
+    //     {
+    //         var temp = dataBuffer;
+    //         dataBuffer = m_frameBackgroundData;
+    //         m_frameBackgroundData = temp;
+    //         bool result = m_latest;
+    //         m_latest = false;
+    //         return result;
+    //     }
+    // }
 }
