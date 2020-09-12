@@ -19,19 +19,19 @@ public class main : MonoBehaviour
         m_backgroundDataProvider = m_skeletalTrackingProvider;
     }
 
-    void Update()
-    {
-        if (m_backgroundDataProvider.IsRunning)
-        {
-            if (m_backgroundDataProvider.GetCurrentFrameData(ref m_lastFrameData))
-            {
-                if (m_lastFrameData.NumOfBodies != 0)
-                {
-                    m_tracker.GetComponent<TrackerHandler>().updateTracker(m_lastFrameData);
-                }
-            }
-        }
-    }
+    // void Update()
+    // {
+    //     if (m_backgroundDataProvider.IsRunning)
+    //     {
+    //         if (m_backgroundDataProvider.GetCurrentFrameData(ref m_lastFrameData))
+    //         {
+    //             if (m_lastFrameData.NumOfBodies != 0)
+    //             {
+    //                 m_tracker.GetComponent<TrackerHandler>().updateTracker(m_lastFrameData);
+    //             }
+    //         }
+    //     }
+    // }
 
     void OnApplicationQuit()
     {
