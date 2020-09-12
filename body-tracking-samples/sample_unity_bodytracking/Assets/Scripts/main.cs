@@ -52,8 +52,8 @@ public class main : MonoBehaviour
         }
         
 
-        bool running = true;
-        while(running)
+        int loopCount = 0;
+        while(loopCount < 100)
         {
             try
             {
@@ -98,6 +98,8 @@ public class main : MonoBehaviour
             {
                 UnityEngine.Debug.LogError(e.Message);
             }
+
+            loopCount += 1;
         }
 
         // tracker.Dispose();
