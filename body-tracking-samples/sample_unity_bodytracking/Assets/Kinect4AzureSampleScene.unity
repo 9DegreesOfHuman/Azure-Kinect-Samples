@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1455675757}
   - component: {fileID: 1455675756}
+  - component: {fileID: 1455675758}
   m_Layer: 0
   m_Name: MainScript
   m_TagString: Untagged
@@ -144,9 +145,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455675755}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71abc990c46f07c40ac230c12aa9636d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b584142449f2604585435689175362e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1455675757
@@ -163,3 +164,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1455675758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455675755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c787afb995d86409263659164396f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultRoomName: defaultExerciseRoom
