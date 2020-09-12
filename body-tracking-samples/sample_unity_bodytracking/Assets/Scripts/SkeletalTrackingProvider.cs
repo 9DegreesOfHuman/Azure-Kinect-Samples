@@ -22,7 +22,7 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
             UnityEngine.Debug.Log("Starting body tracker background thread.");
 
             // Buffer allocations.
-            BackgroundData currentFrameData = new BackgroundData();
+            // BackgroundData currentFrameData = new BackgroundData();
             // Open device.
             using (Device device = Device.Open(id))
             {
@@ -60,7 +60,7 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                             {
                                 IsRunning = true;
                                 // Get number of bodies in the current frame.
-                                currentFrameData.NumOfBodies = frame.NumberOfBodies;
+                                // currentFrameData.NumOfBodies = frame.NumberOfBodies;
 
                                 if (frame.NumberOfBodies != 1) { _print(true, $"Non-singlular # of bodies: {frame.NumberOfBodies}"); }
                                 if (frame.NumberOfBodies == 1) {
