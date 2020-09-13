@@ -1,19 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 // public class PhotonConnect : MonoBehaviour
 public class PhotonConnect : MonoBehaviourPunCallbacks
-{
+{   // e9fe0af3-b001-4ef6-82d3-c102fafd5a63
     RoomOptions roomOptions;
     private byte maxPlayersPerRoom = 4;
     public static PhotonConnect Lobby;
@@ -65,13 +58,11 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
             _print(true, "SampleScene active");
             connectionAttempted = true;
             PhotonNetwork.ConnectUsingSettings();
-
         }
         else if (!connectionAttempted)
         {
             _print(true, "!connectionAttempted && SampleScene inactive: " + SceneManager.GetActiveScene().name);
         }
-
     }
 
     public override void OnConnectedToMaster()
@@ -155,6 +146,19 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
         };
         object[] datas = new object[] { "r, g, b" }; // base.photonView.ViewID,
         PhotonNetwork.RaiseEvent(COLOR_CHANGE_EVENT, datas, raiseEventOptions, SendOptions.SendUnreliable);
+    }
+
+    public void SendBodyTrackingEventData(string data)
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions()
+        {
+            Receivers = ReceiverGroup.All,
+        };        
+        object[] datas = new object[]{data as object};
+        PhotonNetwork.RaiseEvent(BODY_TRACKING_EVENT,
+                                 datas,
+                                 raiseEventOptions,
+                                 SendOptions.SendUnreliable);
     }
 
     private void NetworkingClient_EventReceived(EventData obj)

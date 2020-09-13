@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class main : MonoBehaviour
 {
+    public PhotonConnect photon;
+    [SerializeField]
+    //public SkelePos Sp;
     void Start()
     {
         Task.Run(() => RunBackgroundThreadAsync());
@@ -75,24 +78,42 @@ public class main : MonoBehaviour
                     continue;
                 }
 
-                if (frame.NumberOfBodies != 1) {
-                    _print(true, $"Non-singlular # of bodies: {frame.NumberOfBodies}");
-                    continue;
-                }
+                // if (frame.NumberOfBodies != 1) {
+                //     _print(true, $"Non-singlular # of bodies: {frame.NumberOfBodies}");
+                //     continue;
+                // }
 
                 Microsoft.Azure.Kinect.BodyTracking.Body body = frame.GetBody(0);
                 Microsoft.Azure.Kinect.BodyTracking.Skeleton skeleton = frame.GetBodySkeleton(0);
 
                 int numJoints = Microsoft.Azure.Kinect.BodyTracking.Skeleton.JointCount;
-                // _print(true, $"numJoints: {numJoints}"); // 32
+                // _print(true, $"numJo ints: {numJoints}"); // 32
+
+                //Sp = new SkelePos();              
+                string SkeletalData = "";
+                _print(true, $"Entering joint loop");
                 for (int jointId = 0; jointId < numJoints; jointId++)
                 {
                     Microsoft.Azure.Kinect.BodyTracking.Joint joint = skeleton.GetJoint(jointId);
                     System.Numerics.Vector3 positionVector3 = joint.Position;
                     var pos = joint.Position;
+                    
                     // _print(true, "pos: " + (JointId)jointId + " " + pos[0] + " " + pos[1] + " " + pos[2]);
-                    _print(true, "pos: " + (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
+                    // _print(true, "pos: " + jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
+                    
+                    // allJointInfo = (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z;
+                    // allData.humanRead = allJointInfo;
+                    // allData.id = (JointId)jointId;
+                    // allData.data = new Vector3(pos.X,pos.Y,pos.Z);
+                    // object[] objData = new object[]{"human read", (JointId)jointId, new Vector3(1, 2, 3)};
+                    //_print(true, $"jointId: {jointId}");
+                    //Sp.SkeletalData.Add(jointId, new Vector3(pos.X,pos.Y,pos.Z));
+
+                    //* split each joint ( splits joint ID from Vector 3 , split floats
+                    SkeletalData += $"*{jointId}({pos.X},{pos.Y},{pos.Z}";
                 }
+                _print(true, SkeletalData);
+                photon.SendBodyTrackingEventData(data: SkeletalData);
             }
             catch (Exception e)
             {

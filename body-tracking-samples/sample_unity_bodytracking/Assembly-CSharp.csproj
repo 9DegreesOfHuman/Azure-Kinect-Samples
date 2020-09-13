@@ -84,31 +84,31 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -288,28 +288,28 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Kinect.Sensor">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.Sensor.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Buffers.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Memory.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Reflection.Emit.Lightweight">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Reflection.Emit.Lightweight.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Reflection.Emit.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+      <HintPath>C:/Users/Leon/Desktop/Hololensrepos/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
