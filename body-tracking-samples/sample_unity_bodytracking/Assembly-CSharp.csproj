@@ -287,6 +287,12 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
     </Reference>
@@ -304,12 +310,6 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="Photon3Unity3D">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>D:/repos/9DegreesOfHuman/Azure-Kinect-Samples/body-tracking-samples/sample_unity_bodytracking/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.21f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 
 // public class PhotonConnect : MonoBehaviour
 public class PhotonConnect : MonoBehaviourPunCallbacks
-{
+{   // e9fe0af3-b001-4ef6-82d3-c102fafd5a63
     RoomOptions roomOptions;
     private byte maxPlayersPerRoom = 4;
     public static PhotonConnect Lobby;
@@ -153,6 +153,7 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
         {
             Receivers = ReceiverGroup.All,
         };
+
         object[] datas = new object[] { "r, g, b" }; // base.photonView.ViewID,
         PhotonNetwork.RaiseEvent(COLOR_CHANGE_EVENT, datas, raiseEventOptions, SendOptions.SendUnreliable);
     }
