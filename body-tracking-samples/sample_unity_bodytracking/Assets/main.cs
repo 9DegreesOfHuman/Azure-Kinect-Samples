@@ -6,55 +6,45 @@ using UnityEngine;
 
 public class main : MonoBehaviour
 {
+    bool shouldRun = false;
+    public PhotonConnect photonConnect;
     void Start()
     {
+        shouldRun = true;
         Task.Run(() => RunBackgroundThreadAsync());
     }
 
     protected void RunBackgroundThreadAsync()
     {
-        Device device = null;
-        Calibration deviceCalibration = new Calibration();
-        try
-        {
-            const int id = 0;
-            device = Device.Open(id);
-            device.StartCameras(new DeviceConfiguration()
-            {
-                CameraFPS = FPS.FPS30,
-                ColorResolution = ColorResolution.Off,
-                DepthMode = DepthMode.NFOV_Unbinned,
-                WiredSyncMode = WiredSyncMode.Standalone,
-            });
+        var deviceAndCalibration = GetDeviceAndCalibration();
 
-            UnityEngine.Debug.Log("Open K4A device successful. id " + id + "sn:" + device.SerialNum);
-
-            deviceCalibration = device.GetCalibration();
-
-        } catch (Exception e)
-        {
-            UnityEngine.Debug.LogError(e.Message);
-        }
-
-        Tracker tracker = null;
-        try
-        {
-            TrackerConfiguration calibration = new TrackerConfiguration() {
-                ProcessingMode = TrackerProcessingMode.Gpu,
-                SensorOrientation = SensorOrientation.Default
-            };
-            tracker = Tracker.Create(deviceCalibration, calibration);
-
-            UnityEngine.Debug.Log("Body tracker created.");
-        } catch (Exception e)
-        {
-            UnityEngine.Debug.LogError(e.Message);
-        }
+        Device device = deviceAndCalibration.deviceResult;
+        Calibration deviceCalibration = deviceAndCalibration.calibrationResult;
         
+        Tracker tracker = GetTracker(deviceCalibration);
 
         int loopCount = 0;
-        while(loopCount < 100)
+        while(loopCount < 100 && shouldRun)
         {
+            if (device == null)
+            {
+                UnityEngine.Debug.LogError("device null, continue to next loop");
+                
+                deviceAndCalibration = GetDeviceAndCalibration();
+                device = deviceAndCalibration.deviceResult;
+                deviceCalibration = deviceAndCalibration.calibrationResult;
+                
+                continue;
+            }
+            if (tracker == null)
+            {
+                UnityEngine.Debug.LogError("tracker null, continue to next loop");
+                
+                tracker = GetTracker(deviceCalibration);
+                
+                continue;
+            }
+
             try
             {
                 Capture sensorCapture = device.GetCapture();
@@ -91,7 +81,9 @@ public class main : MonoBehaviour
                     System.Numerics.Vector3 positionVector3 = joint.Position;
                     var pos = joint.Position;
                     // _print(true, "pos: " + (JointId)jointId + " " + pos[0] + " " + pos[1] + " " + pos[2]);
-                    _print(true, "pos: " + (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
+                    // _print(true, "pos: " + (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
+                    _print(true, $"Successfully got joint {jointId}");
+                    photonConnect.SendMessage("got joint");
                 }
             }
             catch (Exception e)
@@ -102,11 +94,58 @@ public class main : MonoBehaviour
             loopCount += 1;
         }
 
+        shouldRun = false;
         _print(true, $"Ran {loopCount} times, disposing");
 
         tracker.Dispose();
         device.Dispose();
         
+    }
+
+    (Device deviceResult, Calibration calibrationResult) GetDeviceAndCalibration()
+    {
+        Device device = null;
+        Calibration deviceCalibration = new Calibration();
+        try
+        {
+            const int id = 0;
+            device = Device.Open(id);
+            device.StartCameras(new DeviceConfiguration()
+            {
+                CameraFPS = FPS.FPS30,
+                ColorResolution = ColorResolution.Off,
+                DepthMode = DepthMode.NFOV_Unbinned,
+                WiredSyncMode = WiredSyncMode.Standalone,
+            });
+
+            UnityEngine.Debug.Log("Open K4A device successful. id " + id + "sn:" + device.SerialNum);
+
+            deviceCalibration = device.GetCalibration();
+
+            return (device, deviceCalibration);
+        } catch (Exception e)
+        {
+            UnityEngine.Debug.LogError(e.Message);
+            return (null, new Calibration());
+        }
+    }
+
+    Tracker GetTracker(Calibration deviceCalibration)
+    {
+        try
+        {
+            TrackerConfiguration calibration = new TrackerConfiguration() {
+                ProcessingMode = TrackerProcessingMode.Gpu,
+                SensorOrientation = SensorOrientation.Default
+            };
+            UnityEngine.Debug.Log("Body tracker created.");
+
+            return Tracker.Create(deviceCalibration, calibration);
+        } catch (Exception e)
+        {
+            UnityEngine.Debug.LogError(e.Message);
+            return null;
+        }
     }
 
     void _print(bool shouldPrint, string msg)
