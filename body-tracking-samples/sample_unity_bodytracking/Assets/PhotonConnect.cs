@@ -149,12 +149,17 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
 
     public void SendMessage()
     {
+        SendMessage("r, g, b");
+    }
+
+    public void SendMessage(string message)
+    {
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions()
         {
             Receivers = ReceiverGroup.All,
         };
 
-        object[] datas = new object[] { "r, g, b" }; // base.photonView.ViewID,
+        object[] datas = new object[] { message }; // base.photonView.ViewID,
         PhotonNetwork.RaiseEvent(COLOR_CHANGE_EVENT, datas, raiseEventOptions, SendOptions.SendUnreliable);
     }
 
