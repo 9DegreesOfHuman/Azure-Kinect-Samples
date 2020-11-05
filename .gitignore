@@ -3,8 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-app-*/
-packages-nuget/
 # User-specific files
 *.suo
 *.user
@@ -353,7 +351,7 @@ ASALocalRun/
 [Bb]uilds/
 Assets/AssetStoreTools*
 Logs/
-body-tracking-samples/sample_unity_bodytracking/Assets/Plugins
+# body-tracking-samples/sample_unity_bodytracking/Assets/Plugins
 body-tracking-samples/sample_unity_bodytracking/*.dll
 body-tracking-samples/sample_unity_bodytracking/*onnx
 body-tracking-samples/sample_unity_bodytracking/*.zip
@@ -383,3 +381,7 @@ sysinfo.txt
 *.unitypackage
 
 /body-tracking-samples/simple_3d_viewer/include
+
+app-*/
+packages-nuget/
+body-tracking-samples/sample_unity_bodytracking/Assets/Plugins/
