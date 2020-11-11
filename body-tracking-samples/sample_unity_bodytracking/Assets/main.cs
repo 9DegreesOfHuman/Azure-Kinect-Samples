@@ -7,8 +7,11 @@ using UnityEngine;
 public class main : MonoBehaviour
 {
     public PhotonConnect photon;
-    [SerializeField]
-    //public SkelePos Sp;
+
+    Tracker tracker;
+    Device device = null;
+    bool capture = true;
+
     void Start()
     {
         Task.Run(() => RunBackgroundThreadAsync());
@@ -16,7 +19,98 @@ public class main : MonoBehaviour
 
     protected void RunBackgroundThreadAsync()
     {
-        Device device = null;
+        var deviceAndCalibration = GetDeviceAndCalibration();
+
+        device = deviceAndCalibration.deviceResult;
+        Calibration deviceCalibration = deviceAndCalibration.calibrationResult;
+
+        tracker = GetTracker(deviceCalibration);
+
+        while (capture)
+        {
+            if (device == null)
+            {
+                UnityEngine.Debug.LogError("device null, continue to next loop");
+
+                deviceAndCalibration = GetDeviceAndCalibration();
+                device = deviceAndCalibration.deviceResult;
+                deviceCalibration = deviceAndCalibration.calibrationResult;
+
+                continue;
+            }
+
+            if (tracker == null)
+            {
+                UnityEngine.Debug.LogError("tracker null, continue to next loop");
+
+                tracker = GetTracker(deviceCalibration);
+
+                continue;
+            }
+
+            try
+            {
+                Capture sensorCapture = device.GetCapture();
+                tracker.EnqueueCapture(sensorCapture);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError(e.Message);
+            }
+
+            Frame frame = null;
+
+            try
+            {
+                frame = tracker.PopResult(TimeSpan.Zero, throwOnTimeout: false);
+
+                if (frame == null)
+                {
+                    UnityEngine.Debug.Log("Pop result from tracker timeout!");
+                    continue;
+                }
+
+                Microsoft.Azure.Kinect.BodyTracking.Body body = frame.GetBody(0);
+                Microsoft.Azure.Kinect.BodyTracking.Skeleton skeleton = frame.GetBodySkeleton(0);
+
+                int numJoints = Microsoft.Azure.Kinect.BodyTracking.Skeleton.JointCount;//32
+
+                string SkeletalData = string.Empty;
+                for (int jointId = 0; jointId < numJoints; jointId++)
+                {
+                    Microsoft.Azure.Kinect.BodyTracking.Joint joint = skeleton.GetJoint(jointId);
+                    System.Numerics.Vector3 positionVector3 = joint.Position;
+                    var pos = joint.Position;
+
+                    //* split each joint ( splits joint ID from Vector 3 , split floats
+
+                    if (jointId > 0)
+                    {                    
+                        SkeletalData += $"*";
+                    }
+
+                    SkeletalData += $"{jointId}({pos.X},{pos.Y},{pos.Z}";
+                }
+                _print(true, SkeletalData);
+                photon.SendBodyTrackingEventData(data: SkeletalData);
+            }
+            catch (Exception e)
+            {
+                if (e == null)
+                {
+                    UnityEngine.Debug.LogError("No exception given weird error");
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError(e.Message);
+                }
+            }
+        }
+    }
+
+    (Device deviceResult, Calibration calibrationResult) GetDeviceAndCalibration()
+    {
+        device = null;
         Calibration deviceCalibration = new Calibration();
         try
         {
@@ -34,102 +128,43 @@ public class main : MonoBehaviour
 
             deviceCalibration = device.GetCalibration();
 
-        } catch (Exception e)
+            return (device, deviceCalibration);
+        }
+        catch (Exception e)
         {
             UnityEngine.Debug.LogError(e.Message);
+            return (null, new Calibration());
         }
+    }
 
-        Tracker tracker = null;
+    Tracker GetTracker(Calibration deviceCalibration)
+    {
         try
         {
-            TrackerConfiguration calibration = new TrackerConfiguration() {
+            TrackerConfiguration calibration = new TrackerConfiguration()
+            {
                 ProcessingMode = TrackerProcessingMode.Gpu,
                 SensorOrientation = SensorOrientation.Default
             };
-            tracker = Tracker.Create(deviceCalibration, calibration);
-
             UnityEngine.Debug.Log("Body tracker created.");
-        } catch (Exception e)
+
+            return Tracker.Create(deviceCalibration, calibration);
+        }
+        catch (Exception e)
         {
             UnityEngine.Debug.LogError(e.Message);
+            return null;
         }
-        
-
-        int loopCount = 0;
-        while(loopCount < 100)
-        {
-            try
-            {
-                Capture sensorCapture = device.GetCapture();
-                tracker.EnqueueCapture(sensorCapture);
-            }
-            catch (Exception e)
-            {
-                UnityEngine.Debug.LogError(e.Message);
-            }
-
-            Frame frame = null;
-            try
-            {
-                frame = tracker.PopResult(TimeSpan.Zero, throwOnTimeout: false);
-                if (frame == null)
-                {
-                    UnityEngine.Debug.Log("Pop result from tracker timeout!");
-                    continue;
-                }
-
-                // if (frame.NumberOfBodies != 1) {
-                //     _print(true, $"Non-singlular # of bodies: {frame.NumberOfBodies}");
-                //     continue;
-                // }
-
-                Microsoft.Azure.Kinect.BodyTracking.Body body = frame.GetBody(0);
-                Microsoft.Azure.Kinect.BodyTracking.Skeleton skeleton = frame.GetBodySkeleton(0);
-
-                int numJoints = Microsoft.Azure.Kinect.BodyTracking.Skeleton.JointCount;
-                // _print(true, $"numJo ints: {numJoints}"); // 32
-
-                //Sp = new SkelePos();              
-                string SkeletalData = "";
-                _print(true, $"Entering joint loop");
-                for (int jointId = 0; jointId < numJoints; jointId++)
-                {
-                    Microsoft.Azure.Kinect.BodyTracking.Joint joint = skeleton.GetJoint(jointId);
-                    System.Numerics.Vector3 positionVector3 = joint.Position;
-                    var pos = joint.Position;
-                    
-                    // _print(true, "pos: " + (JointId)jointId + " " + pos[0] + " " + pos[1] + " " + pos[2]);
-                    // _print(true, "pos: " + jointId + " " + pos.X + " " + pos.Y + " " + pos.Z);
-                    
-                    // allJointInfo = (JointId)jointId + " " + pos.X + " " + pos.Y + " " + pos.Z;
-                    // allData.humanRead = allJointInfo;
-                    // allData.id = (JointId)jointId;
-                    // allData.data = new Vector3(pos.X,pos.Y,pos.Z);
-                    // object[] objData = new object[]{"human read", (JointId)jointId, new Vector3(1, 2, 3)};
-                    //_print(true, $"jointId: {jointId}");
-                    //Sp.SkeletalData.Add(jointId, new Vector3(pos.X,pos.Y,pos.Z));
-
-                    //* split each joint ( splits joint ID from Vector 3 , split floats
-                    SkeletalData += $"*{jointId}({pos.X},{pos.Y},{pos.Z}";
-                }
-                _print(true, SkeletalData);
-                photon.SendBodyTrackingEventData(data: SkeletalData);
-            }
-            catch (Exception e)
-            {
-                UnityEngine.Debug.LogError(e.Message);
-            }
-
-            loopCount += 1;
-        }
-
-        _print(true, $"Ran {loopCount} times, disposing");
-
-        tracker.Dispose();
-        device.Dispose();
-        
     }
 
+    void OnDestroy()
+    {
+        capture = false;
+        device.Dispose();
+        tracker.Dispose();
+        
+    }
+    
     void _print(bool shouldPrint, string msg)
     {
         if (shouldPrint) Debug.Log(msg);

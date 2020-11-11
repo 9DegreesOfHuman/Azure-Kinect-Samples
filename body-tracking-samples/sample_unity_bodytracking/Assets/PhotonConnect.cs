@@ -19,15 +19,9 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
     private const byte BODY_TRACKING_EVENT = 1;
     private bool connectionAttempted = false;
 
-    public void onClick_test()
-    {
-        _print(true, "onclick test");
-        SendMessage();
-    }
-
     private void Awake()
     {
-        _print(true, "Awake");
+        //_print(true, "Awake");
         roomOptions = new RoomOptions { IsVisible = true, IsOpen = true, MaxPlayers = maxPlayersPerRoom };
         if (Lobby == null)
         {
@@ -41,27 +35,27 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
         }
 
         DontDestroyOnLoad(gameObject);
-        _print(true, "Awoke");
+        //_print(true, "Awoke");
     }
 
     void Start()
     {
-        _print(true, "Start start");
+        //_print(true, "Start start");
         PhotonNetwork.ConnectUsingSettings();
-        _print(true, "Start started");
+        //_print(true, "Start started");
     }
 
     void Update()
     {
-        if (!connectionAttempted && SceneManager.GetActiveScene().name == "SampleScene")
+        if (!connectionAttempted)
         {
-            _print(true, "SampleScene active");
+            //_print(true, "SampleScene active");
             connectionAttempted = true;
             PhotonNetwork.ConnectUsingSettings();
         }
         else if (!connectionAttempted)
         {
-            _print(true, "!connectionAttempted && SampleScene inactive: " + SceneManager.GetActiveScene().name);
+            //_print(true, "!connectionAttempted && SampleScene inactive: " + SceneManager.GetActiveScene().name);
         }
     }
 
@@ -69,7 +63,7 @@ public class PhotonConnect : MonoBehaviourPunCallbacks
     {
         _print(true, "OnConnectedToMaster begin");
         var randomUserId = UnityEngine.Random.Range(0, 999999);
-        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.AuthValues = new AuthenticationValues();
         PhotonNetwork.AuthValues.UserId = randomUserId.ToString();
         userIdCount++;
